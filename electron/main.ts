@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import {app, BrowserWindow} from "electron";
+import {app, BrowserWindow, ipcMain} from "electron";
+import {autoUpdater} from "electron-updater";
 import * as path from "path";
 import * as url from "url";
 
@@ -11,6 +12,7 @@ function createWindow() {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
+      preload: path.join(__dirname, "preload.js"),
     },
   });
   console.log(process.env.NODE_ENV);
@@ -29,7 +31,28 @@ function createWindow() {
   mainWindow.on("closed", () => {
     mainWindow = null;
   });
+
+  mainWindow.once("ready-to-show", () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  });
+
+  autoUpdater.on("update-available", () => {
+    mainWindow?.webContents.send("update_available");
+  });
+  autoUpdater.on("update-downloaded", () => {
+    mainWindow?.webContents.send("update_downloaded");
+  });
 }
 
 app.on("ready", createWindow);
+
+// IPC Listeners
+ipcMain.on("app_version", (event) => {
+  event.sender.send("app_version", {version: app.getVersion()});
+});
+
+ipcMain.on("restart_app", () => {
+  autoUpdater.quitAndInstall();
+});
+
 app.allowRendererProcessReuse = true;

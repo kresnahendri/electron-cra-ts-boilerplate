@@ -2,35 +2,57 @@
   "name": "electron-cra-ts-boilerplate",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@chakra-ui/react": "^1.0.1",
-    "@emotion/react": "^11.1.1",
-    "@emotion/styled": "^11.0.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
-    "eslint": "^7.14.0",
-    "eslint-config-react-kresnahendri": "kresnahendri/eslint-config-react-kresnahendri",
-    "framer-motion": "^2.9.4",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-icons": "^4.1.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
-    "typescript": "^4.0.3",
-    "web-vitals": "^1.0.1"
+  "main": "electron/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kresnahendri/electron-cra-ts-boilerplate.git"
   },
   "scripts": {
     "dev:web": "BROWSER=none SKIP_PREFLIGHT_CHECK=true react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "build:web": "react-scripts build",
+    "test:web": "react-scripts test",
+    "eject:cra": "react-scripts eject",
     "watch": "tsc -w",
-    "dev": "concurrently \"yarn dev:web\" \"wait-on http://localhost:3000 && tsc electron/main.ts && electron ./electron/main.js\""
+    "dev:electron": "wait-on http://localhost:3000 && tsc electron/main.ts && electron .",
+    "dev": "concurrently \"yarn dev:web\" \"yarn:dev:electron\"",
+    "build": "yarn build:web && electron-builder build --mac --win --publish never",
+    "deploy": "yarn build:web && electron-builder build --mac --win --publish always"
+  },
+  "build": {
+    "extends": null,
+    "files": [
+      "dist/**/*",
+      "./build/**/*",
+      "./electron/main.js",
+      "package.json"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "build/favicon.ico"
+    },
+    "directories": {
+      "buildResources": "assets"
+    }
   },
   "browserslist": {
     "production": [
@@ -44,10 +66,34 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "@chakra-ui/react": "^1.0.1",
+    "@emotion/react": "^11.1.1",
+    "@emotion/styled": "^11.0.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/react-dom": "^17.0.0",
+    "electron-updater": "^4.3.5",
+    "eslint": "^7.14.0",
+    "eslint-config-react-kresnahendri": "kresnahendri/eslint-config-react-kresnahendri",
+    "framer-motion": "^2.9.4",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.1.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.1",
+    "typescript": "^4.0.3",
+    "web-vitals": "^1.0.1"
+  },
   "devDependencies": {
+    "@types/electron": "^1.6.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
     "@types/react-router-dom": "^5.1.6",
     "concurrently": "^5.3.0",
     "electron": "^11.0.3",
+    "electron-builder": "^22.9.1",
     "wait-on": "^5.2.0"
   }
 }
