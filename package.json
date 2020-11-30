@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "electron/main.js",
+  "description": "Minimalist boilerplate Electron + CRA + TS",
   "repository": {
     "type": "git",
     "url": "https://github.com/kresnahendri/electron-cra-ts-boilerplate.git"
@@ -15,8 +16,8 @@
     "watch": "tsc -w",
     "dev:electron": "wait-on http://localhost:3000 && tsc electron/main.ts && electron .",
     "dev": "concurrently \"yarn dev:web\" \"yarn:dev:electron\"",
-    "build": "yarn build:web && electron-builder build --mac --win --publish never",
-    "deploy": "yarn build:web && electron-builder build --mac --win --publish always"
+    "build": "rimraf dist && yarn build:web && electron-builder build --mac --win --linux --publish never",
+    "deploy": "rimraf dist && yarn build:web && electron-builder build --mac --win --linux --publish always"
   },
   "build": {
     "extends": null,
@@ -47,8 +48,7 @@
       ]
     },
     "win": {
-      "target": "squirrel",
-      "icon": "build/favicon.ico"
+      "target": "nsis"
     },
     "directories": {
       "buildResources": "assets"
@@ -94,6 +94,8 @@
     "concurrently": "^5.3.0",
     "electron": "^11.0.3",
     "electron-builder": "^22.9.1",
+    "electron-builder-squirrel-windows": "^22.9.1",
+    "rimraf": "^3.0.2",
     "wait-on": "^5.2.0"
   }
 }
