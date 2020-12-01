@@ -42,6 +42,7 @@
     },
     "extends": null,
     "files": [
+      "artifacts/**/*",
       "dist/**/*",
       "./build/**/*",
       "./electron/main.js",
