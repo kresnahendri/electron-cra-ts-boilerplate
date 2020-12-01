@@ -4,6 +4,10 @@
   "private": true,
   "main": "electron/main.js",
   "description": "Minimalist boilerplate Electron + CRA + TS",
+  "author": {
+    "email": "kresnahendri@gmail.com",
+    "name": "Kresna Hendri"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/kresnahendri/electron-cra-ts-boilerplate.git"
