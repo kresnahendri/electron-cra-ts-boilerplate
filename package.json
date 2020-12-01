@@ -99,6 +99,7 @@
     "electron": "^11.0.3",
     "electron-builder": "^22.9.1",
     "electron-builder-squirrel-windows": "^22.9.1",
+    "electron-rebuild": "^2.3.2",
     "rimraf": "^3.0.2",
     "wait-on": "^5.2.0"
   }
