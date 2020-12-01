@@ -19,5 +19,5 @@ jobs:
       run: yarn install
     - name: Deploy Artifacts
       run: yarn deploy
-      with:
-        super_secret: ${{ secrets.GH_TOKEN }}
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
