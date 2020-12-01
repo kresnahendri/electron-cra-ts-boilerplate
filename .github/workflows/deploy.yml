@@ -5,9 +5,9 @@ on:
       - main
 jobs:
   deploy:
-    runs-on: macos-latest
     strategy:
       matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
         node-version: [15.x]
     steps:
     - uses: actions/checkout@v1
@@ -19,6 +19,8 @@ jobs:
       run: yarn install
     - name: Rebuild yarn packages
       run: yarn rebuild
+    - name: Prebuild
+      run: yarn prebuild
     - name: Deploy Artifacts
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
