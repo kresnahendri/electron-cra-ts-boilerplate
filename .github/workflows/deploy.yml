@@ -20,4 +20,4 @@ jobs:
     - name: Deploy Artifacts
       run: yarn deploy
       with:
-        deploy_key: ${{ secrets.GH_TOKEN }}
+        super_secret: ${{ secrets.GH_TOKEN }}
