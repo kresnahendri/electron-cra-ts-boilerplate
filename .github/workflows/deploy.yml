@@ -38,8 +38,10 @@ jobs:
     - name: Cleanup artifacts
       if: matrix.os != 'windows-latest'
       run: |
+        ls -la dist
         mkdir artifacts
         cp -r "dist/(*.exe,*.deb,*.AppImage,*.dmg)" artifacts || true
+        ls -la artifacts
     - name: Cleanup artifacts Win
       if: matrix.os == 'windows-latest'
       run: |
