@@ -20,6 +20,6 @@ jobs:
     - name: Rebuild yarn packages
       run: yarn rebuild
     - name: Deploy Artifacts
-      run: yarn deploy
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: yarn build && yarn deploy

@@ -20,8 +20,9 @@
     "watch": "tsc -w",
     "dev:electron": "wait-on http://localhost:3000 && tsc electron/main.ts && electron .",
     "dev": "concurrently \"yarn dev:web\" \"yarn:dev:electron\"",
-    "build": "rimraf dist && yarn build:web && electron-builder build --mac --win --linux --publish never",
-    "deploy": "rimraf dist && yarn build:web && electron-builder build --mac --win --linux --publish always"
+    "rebuild": "./node_modules/.bin/electron-rebuild",
+    "build": "NODE_ENV=production rimraf dist && yarn build:web && electron-builder build --mac --win --linux --publish never",
+    "deploy": "NODE_ENV=production rimraf dist && yarn build:web && electron-builder build --mac --win --linux --publish always"
   },
   "build": {
     "extends": null,
