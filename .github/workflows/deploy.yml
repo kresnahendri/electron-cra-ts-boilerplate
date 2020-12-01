@@ -4,7 +4,8 @@ on:
     branches:
       - main
 jobs:
-  deploy:
+  release:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
