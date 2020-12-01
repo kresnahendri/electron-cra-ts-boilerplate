@@ -14,7 +14,7 @@
   },
   "scripts": {
     "dev:web": "BROWSER=none SKIP_PREFLIGHT_CHECK=true react-scripts start",
-    "build:web": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "build:web": "react-scripts build",
     "test:web": "react-scripts test",
     "eject:cra": "react-scripts eject",
     "watch": "tsc -w",
@@ -22,7 +22,7 @@
     "dev": "concurrently \"yarn dev:web\" \"yarn:dev:electron\"",
     "rebuild": "./node_modules/.bin/electron-rebuild",
     "compile": "electron-webpack",
-    "prebuild": "tsc electron/main.ts && NODE_ENV=production rimraf dist && yarn build:web",
+    "prebuild": "tsc electron/main.ts && rimraf dist && yarn build:web",
     "build": "electron-builder build --mac --win --linux --publish never",
     "deploy": "electron-builder build --mac --win --linux --publish always",
     "postinstall": "electron-builder install-app-deps"
