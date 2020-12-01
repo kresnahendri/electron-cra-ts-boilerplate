@@ -28,11 +28,13 @@ jobs:
       env:
         NODE_ENV: ${{ secrets.NODE_ENV }}
         SKIP_PREFLIGHT_CHECK: ${{ secrets.SKIP_PREFLIGHT_CHECK }}
-      run: yarn prebuild
+      run: |
+        yarn prebuild
     - name: Deploy Artifacts
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: yarn deploy
+      run: |
+        yarn deploy
     - name: Cleanup artifacts
       if: matrix.os != 'windows-latest'
       run: |
