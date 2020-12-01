@@ -18,11 +18,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install Packages
       run: yarn install
-    - name: Rebuild yarn packages
-      run: yarn rebuild
     - name: Prebuild
       run: yarn prebuild
     - name: Deploy Artifacts
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: yarn build && yarn deploy
+      run: yarn deploy
