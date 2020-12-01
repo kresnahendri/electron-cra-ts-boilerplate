@@ -14,7 +14,7 @@
   },
   "scripts": {
     "dev:web": "BROWSER=none SKIP_PREFLIGHT_CHECK=true react-scripts start",
-    "build:web": "react-scripts build",
+    "build:web": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "test:web": "react-scripts test",
     "eject:cra": "react-scripts eject",
     "watch": "tsc -w",
