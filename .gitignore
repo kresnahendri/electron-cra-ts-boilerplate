@@ -22,6 +22,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 electron/main.js
-electron-builder.yml
+*electron-builder.yml
 dist/
 .eslintcache
