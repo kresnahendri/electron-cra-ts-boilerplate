@@ -22,7 +22,7 @@
     "dev": "concurrently \"yarn dev:web\" \"yarn:dev:electron\"",
     "rebuild": "./node_modules/.bin/electron-rebuild",
     "compile": "electron-webpack",
-    "prebuild": "NODE_ENV=production rimraf dist && yarn build:web && yarn compile",
+    "prebuild": "tsc electron/main.ts && NODE_ENV=production rimraf dist && yarn build:web",
     "build": "yarn prebuild && electron-builder build --mac --win --linux --publish never",
     "deploy": "yarn prebuild && electron-builder build --mac --win --linux --publish always",
     "postinstall": "electron-builder install-app-deps"
