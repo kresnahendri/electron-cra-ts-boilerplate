@@ -22,9 +22,13 @@
     "dev": "concurrently \"yarn dev:web\" \"yarn:dev:electron\"",
     "rebuild": "./node_modules/.bin/electron-rebuild",
     "build": "NODE_ENV=production rimraf dist && yarn build:web && electron-builder build --mac --win --linux --publish never",
-    "deploy": "NODE_ENV=production rimraf dist && yarn build:web && electron-builder build --mac --win --linux --publish always"
+    "deploy": "NODE_ENV=production rimraf dist && yarn build:web && electron-builder build --mac --win --linux --publish always",
+    "postinstall": "electron-builder install-app-deps"
   },
   "build": {
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
     "extends": null,
     "files": [
       "dist/**/*",
