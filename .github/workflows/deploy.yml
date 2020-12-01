@@ -22,6 +22,9 @@ jobs:
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
+        env:
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          SKIP_PREFLIGHT_CHECK: ${{ secrets.SKIP_PREFLIGHT_CHECK }}
         with:
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
