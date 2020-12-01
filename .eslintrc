@@ -4,7 +4,12 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-curly-brace-presence": "off",
-    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "varsIgnorePattern": "^React$"
+      }
+    ],
     "react-native/no-inline-styles": "off"
   }
 }

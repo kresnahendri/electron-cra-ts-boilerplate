@@ -7,12 +7,12 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
-import {FormEvent} from "react";
+import React from "react";
 import {FiArrowLeft} from "react-icons/fi";
 import {Link} from "react-router-dom";
 
 const LoginScreen = () => {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // eslint-disable-next-line no-alert
     alert("Send login request to API");
