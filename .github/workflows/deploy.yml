@@ -23,12 +23,18 @@ jobs:
           
       - name: Install Packages
         run: yarn install
+      
+      - name: Prebuild
+        env:
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          SKIP_PREFLIGHT_CHECK: ${{ secrets.SKIP_PREFLIGHT_CHECK }}
 
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
         env:
           NODE_ENV: ${{ secrets.NODE_ENV }}
           SKIP_PREFLIGHT_CHECK: ${{ secrets.SKIP_PREFLIGHT_CHECK }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
