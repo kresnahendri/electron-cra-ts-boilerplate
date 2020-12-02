@@ -19,6 +19,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 15
+
+      - name: Windows setup WSL
+        if: matrix.os == 'windows-latest'
+        uses: Vampire/setup-wsl@v1
           
       - name: Install Packages
         env:
@@ -26,6 +30,16 @@ jobs:
         run: yarn install
       
       - name: Prebuild
+        if: matrix.os != 'windows-latest'
+        env:
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          SKIP_PREFLIGHT_CHECK: ${{ secrets.SKIP_PREFLIGHT_CHECK }}
+        run: |
+          yarn prebuild
+      
+      - name: Prebuild - WINDOWS
+        if: matrix.os == 'windows-latest'
+        shell: wsl-bash_Ubuntu-20.04 {0}
         env:
           NODE_ENV: ${{ secrets.NODE_ENV }}
           SKIP_PREFLIGHT_CHECK: ${{ secrets.SKIP_PREFLIGHT_CHECK }}
@@ -42,12 +56,8 @@ jobs:
           SKIP_PREFLIGHT_CHECK: ${{ secrets.SKIP_PREFLIGHT_CHECK }}
         run: |
           yarn publish:s3
-      
-      - name: Windows setup WSL
-        if: matrix.os == 'windows-latest'
-        uses: Vampire/setup-wsl@v1
 
-      - name: Deploy to S3 - Windows
+      - name: Deploy to S3 - WINDOWS
         if: matrix.os == 'windows-latest'
         shell: wsl-bash_Ubuntu-20.04 {0}
         env:
