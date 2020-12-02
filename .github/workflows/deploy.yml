@@ -28,7 +28,8 @@ jobs:
         env:
           NODE_ENV: ${{ secrets.NODE_ENV }}
           SKIP_PREFLIGHT_CHECK: ${{ secrets.SKIP_PREFLIGHT_CHECK }}
-
+        run: |
+          yarn prebuild
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
         env:
