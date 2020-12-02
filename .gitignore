@@ -25,3 +25,4 @@ electron/main.js
 *electron-builder.yml
 dist/
 .eslintcache
+/private_docs
