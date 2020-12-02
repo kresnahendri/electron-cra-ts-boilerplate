@@ -24,7 +24,7 @@
     "compile": "electron-webpack",
     "prebuild": "tsc electron/main.ts && rimraf dist && yarn build:web",
     "build": "yarn prebuild && electron-builder build --mac --win --linux --publish never",
-    "publish:s3": "yarn prebuild && electron-builder --mac --win --linux --publish always",
+    "publish:s3": "yarn prebuild && electron-builder build --mac --win --linux --publish always",
     "postinstall": "yarn prebuild && electron-builder install-app-deps"
   },
   "electronWebpack": {
