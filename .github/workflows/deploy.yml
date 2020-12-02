@@ -31,7 +31,6 @@ jobs:
           yarn prebuild
 
       - name: Deploy to S3
-        if: matrix.os == 'macos-latest'
         env:
           NODE_ENV: ${{ secrets.NODE_ENV }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
