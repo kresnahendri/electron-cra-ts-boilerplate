@@ -25,6 +25,7 @@
     "prebuild": "tsc electron/main.ts && rimraf dist && yarn build:web",
     "build": "electron-builder build --mac --win --linux --publish never",
     "deploy": "electron-builder build --mac --win --linux --publish always",
+    "deploy:mac": "electron-builder build --mac --publish always",
     "postinstall": "electron-builder install-app-deps"
   },
   "electronWebpack": {
