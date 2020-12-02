@@ -43,9 +43,12 @@ jobs:
         run: |
           yarn publish:s3
       
-      - name: Deploy to S3 - Windows
+      - name: Windows setup WSL
         if: matrix.os == 'windows-latest'
         uses: Vampire/setup-wsl@v1
+
+      - name: Deploy to S3 - Windows
+        if: matrix.os == 'windows-latest'
         shell: wsl-bash_Ubuntu-20.04 {0}
         env:
           NODE_ENV: ${{ secrets.NODE_ENV }}
