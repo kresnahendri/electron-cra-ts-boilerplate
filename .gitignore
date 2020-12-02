@@ -26,3 +26,4 @@ electron/main.js
 dist/
 .eslintcache
 /private_docs
+dev-app-update.yml

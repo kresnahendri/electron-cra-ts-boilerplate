@@ -1,6 +1,6 @@
 {
   "name": "electron-cra-ts-boilerplate",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "main": "electron/main.js",
   "description": "Minimalist boilerplate Electron + CRA + TS",
@@ -24,7 +24,7 @@
     "compile": "electron-webpack",
     "prebuild": "tsc electron/main.ts && rimraf dist && yarn build:web",
     "build": "yarn prebuild && electron-builder build --mac --win --linux --publish never",
-    "publish:s3": "yarn prebuild && electron-builder --publish always",
+    "publish:s3": "yarn prebuild && electron-builder --mac --win --linux --publish always",
     "postinstall": "yarn prebuild && electron-builder install-app-deps"
   },
   "electronWebpack": {
@@ -106,6 +106,7 @@
     "eslint": "^7.14.0",
     "eslint-config-react-kresnahendri": "kresnahendri/eslint-config-react-kresnahendri",
     "framer-motion": "^2.9.4",
+    "ramda": "^0.27.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
@@ -118,6 +119,7 @@
     "@types/electron": "^1.6.10",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
+    "@types/ramda": "^0.27.32",
     "@types/react-router-dom": "^5.1.6",
     "concurrently": "^5.3.0",
     "electron": "^11.0.3",
