@@ -2,7 +2,7 @@ import "./AppDefault.css";
 
 import {Button} from "@chakra-ui/react";
 import {useState} from "react";
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import {HashRouter as Router, Link, Route, Switch} from "react-router-dom";
 
 import logo from "../logo.svg";
 import LoginScreen from "./LoginScreen";

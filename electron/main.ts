@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import {
   app,
   BrowserWindow,
@@ -7,8 +8,8 @@ import {
   MenuItem,
   MenuItemConstructorOptions,
   MessageBoxReturnValue,
-  // eslint-disable-next-line import/no-extraneous-dependencies
 } from "electron";
+import * as isDev from "electron-is-dev";
 import {autoUpdater} from "electron-updater";
 import * as path from "path";
 import {clone} from "ramda";
@@ -35,7 +36,7 @@ const menuTemplate: (MenuItemConstructorOptions | MenuItem)[] = [
       {role: "hide"},
       {role: "hideOthers"},
       {role: "unhide"},
-      {type: "separator"},
+      isDev ? {role: "toggleDevTools"} : {type: "separator"},
       {role: "quit"},
     ],
   },
@@ -90,26 +91,23 @@ const sendStatusToWindow = (text: string) => {
 };
 
 function createWindow() {
-  checkForUpdates({silent: true});
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 900,
+    height: 700,
     webPreferences: {
+      devTools: true,
       nodeIntegration: true,
       preload: path.join(__dirname, "preload.js"),
     },
   });
-  console.log(process.env.NODE_ENV);
-  if (process.env.NODE_ENV === "production") {
-    mainWindow.loadURL(
-      url.format({
-        pathname: path.join(__dirname, "../build/index.html"),
-        protocol: "file:",
-        slashes: true,
-      }),
-    );
-  } else {
+
+  if (isDev) {
     mainWindow.loadURL("http://localhost:3000");
+  } else {
+    checkForUpdates({silent: true});
+    mainWindow.loadURL(
+      url.format(`file://${path.join(__dirname, "../index.html")}`),
+    );
   }
 
   mainWindow.on("closed", () => {
